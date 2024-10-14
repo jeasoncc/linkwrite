@@ -1,0 +1,38 @@
+{
+  "name": "template-typescript",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri dev",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.10.2",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@tauri-apps/api": "^1",
+    "add": "^2.0.6",
+    "core": "1.0.0",
+    "framer-motion": "^11.11.8",
+    "log": "1.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rxjs": "^7.8.1",
+    "yarn": "^1.22.22"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.0.1",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "sass": "^1.79.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1"
+  }
+}

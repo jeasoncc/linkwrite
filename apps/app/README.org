@@ -1,0 +1,48 @@
+** Introduction
+
+  #+begin_src
+my-react-app/
+├── public/
+│   ├── index.html
+│   └── ...
+├── src/
+│   ├── assets/
+│   │   ├── images/
+│   │   └── styles/
+│   ├── components/
+│   │   ├── common/
+│   │   └── specific/
+│   ├── hooks/
+│   ├── pages/
+│   │   ├── Home/
+│   │   ├── About/
+│   │   └── ...
+│   ├── services/
+│   ├── store/
+│   ├── utils/
+│   ├── App.tsx
+│   ├── index.tsx
+│   └── ...
+├── .gitignore
+├── package.json
+├── tsconfig.json
+└── README.md
+
+  #+end_src
+  - public/：存放静态文件，如 index.html、favicon 等。
+  - src/：主要的源代码目录。
+  - assets/：存放静态资源，如图片和样式文件。
+  - images/：存放图片资源。
+  - styles/：存放全局样式文件。
+  - components/：存放通用组件和特定组件。
+  - common/：存放可重用的通用组件。
+  - specific/：存放特定功能或页面的组件。
+  - hooks/：存放自定义的 React Hooks。
+  - pages/：存放页面组件，每个页面一个文件夹。
+  - Home/：主页组件及其相关文件。
+  - About/：关于页面组件及其相关文件。
+  - services/：存放与 API 调用或业务逻辑相关的代码。
+  - store/：存放全局状态管理相关的代码（如 Redux）。
+  - utils/：存放工具函数或通用的帮助函数。
+  - App.tsx：主应用组件。
+  - index.tsx：应用入口文件。

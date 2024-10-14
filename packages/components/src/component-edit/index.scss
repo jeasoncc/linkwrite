@@ -1,0 +1,18 @@
+/* 仅适用于 component-edit 组件的样式 */
+
+.component-edit__container {
+    padding: 20px;
+    border: solid 1px red;
+}
+
+.component-edit__item {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #e0e0e0;
+    }
+}
