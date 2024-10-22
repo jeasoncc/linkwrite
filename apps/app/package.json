@@ -1,5 +1,5 @@
 {
-  "name": "template-typescript",
+  "name": "linkeditor",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri dev",
+    "tauri": "tauri",
     "test": "jest"
   },
   "dependencies": {
@@ -16,7 +16,7 @@
     "@emotion/styled": "^11.13.0",
     "@tauri-apps/api": "^1",
     "add": "^2.0.6",
-    "core": "1.0.0",
+    "core-app": "1.0.0",
     "framer-motion": "^11.11.8",
     "log": "1.0.0",
     "react": "^18.2.0",
