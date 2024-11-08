@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
+import React, { useState } from "react";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
@@ -12,24 +13,30 @@ import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 
-import ToolbarPlugin from "./plugins/ToolbarPlugin";
-import { exampleTheme } from "./theme";
 import "./style.css";
 import TreeViewPlugin from "./plugins/TreeViewPlugin";
+import ToolbarPlugin from "./plugins/ToolbarPlugin";
+import { MyOnChangePlugin } from "./plugins/MyOnChangePlugin";
+import { editorConfig } from "./config/editorConfig";
+import { EditorState } from "lexical";
+
 const placeholder = "Enter some rich text...";
 
-const editorConfig = {
-    namespace: "React.js Demo",
-    nodes: [],
-    // Handling of errors during update
-    onError(error: Error) {
-        throw error;
-    },
-    // The editor theme
-    theme: exampleTheme,
-};
+interface AppProps {
+    saveState?: (state: string) => void;
+}
 
-export default function App() {
+const App: React.FC<AppProps> = ({ saveState = (x) => { } }) => {
+    // const [editorState, setEditorState] = useState<EditorState | undefined>(
+    //     undefined,
+    // );
+
+    const onChange = (editorState: EditorState) => {
+        const editorStateJSON = editorState.toJSON();
+        return saveState(JSON.stringify(editorStateJSON));
+        // setEditorState(editorState);
+    };
+
     return (
         <LexicalComposer initialConfig={editorConfig}>
             <div className="editor-container">
@@ -49,9 +56,12 @@ export default function App() {
                     />
                     <HistoryPlugin />
                     <AutoFocusPlugin />
+                    <MyOnChangePlugin onChange={onChange} />
                     <TreeViewPlugin />
                 </div>
             </div>
         </LexicalComposer>
     );
-}
+};
+
+export default App;
