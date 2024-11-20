@@ -8,10 +8,13 @@ import "./index.scss";
 // 模拟数据
 import { LexicalApp } from "core-app";
 const FooBar: React.FC = () => {
+  const saveState = (state: string) => {
+    console.log(state);
+  };
   return (
     <div className="foo-bar__container">
       <h1>foo-bar</h1>
-      <LexicalApp />
+      <LexicalApp saveState={saveState} />
     </div>
   );
 };
