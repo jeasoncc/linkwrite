@@ -1,6 +1,6 @@
-// 组件名称: component-terminal
+// 组件名称: sidebar
 // 作者: Martin
-// 创建日期: 2024-10-14 16:35:28
+// 创建日期: 2024-12-07 05:39:59
 // 描述: 这是一个自动生成的组件文件
 
 import React, { useEffect } from 'react';
@@ -11,8 +11,8 @@ import './index.scss';
 // 模拟数据
 import items from './data.json';
 import { Item } from './index.scheme';
-
-const ComponentTerminal: React.FC = () => {
+import { Button } from 'react-bootstrap';
+const Sidebar: React.FC = () => {
     useEffect(() => {
         const clickStream = fromEvent(document, 'click').pipe(
             debounceTime(300),
@@ -33,12 +33,15 @@ const ComponentTerminal: React.FC = () => {
     };
 
     return (
-        <div className="component-terminal__container">
-            <h1>component-terminal</h1>
+        <div className="sidebar__container">
+            <h1>sidebar</h1>
+            <Button as="a" variant="success">
+                Button as link
+            </Button>
             {items.map((item: Item, index: number) => (
                 <div
                     key={index}
-                    className="component-terminal__item"
+                    className="sidebar__item"
                     onClick={() => handleClick(item)}
                 >
                     {item.firstName} {item.lastName}
@@ -48,4 +51,4 @@ const ComponentTerminal: React.FC = () => {
     );
 };
 
-export default ComponentTerminal;
+export default Sidebar;

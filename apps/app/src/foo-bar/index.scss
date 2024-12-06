@@ -1,5 +1,5 @@
 /* 仅适用于 foo-bar 组件的样式 */
-
+// @import '~bootstrap/scss/bootstrap';
 .foo-bar__container {
     padding: 20px;
     border: solid 1px red;

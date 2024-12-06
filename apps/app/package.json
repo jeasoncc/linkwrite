@@ -17,12 +17,14 @@
     "@tauri-apps/api": "^1",
     "add": "^2.0.6",
     "core-app": "1.0.0",
+    "db": "1.0.0",
+    "components": "1.0.0",
+    "utils": "1.0.0",
     "framer-motion": "^11.11.8",
     "log": "1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rxjs": "^7.8.1",
-    "yarn": "^1.22.22"
+    "rxjs": "^7.8.1"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1",

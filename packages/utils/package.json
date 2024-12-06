@@ -1,5 +1,5 @@
 {
-  "name": "db",
+  "name": "utils",
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
@@ -10,8 +10,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "lexical": "^0.18.0",
-    "rxdb": "^15.39.0",
-    "log": "1.0.0"
+    "uuid": "^11.0.3"
   }
 }

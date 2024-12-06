@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import ComponentHead from './index';
+import Sidebar from './index';
 
 test('renders component', () => {
-    render(<ComponentHead />);
+    render(<Sidebar />);
 });

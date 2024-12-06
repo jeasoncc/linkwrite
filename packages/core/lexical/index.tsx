@@ -13,28 +13,27 @@ import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 
-import "./style.css";
 import TreeViewPlugin from "./plugins/TreeViewPlugin";
 import ToolbarPlugin from "./plugins/ToolbarPlugin";
 import { MyOnChangePlugin } from "./plugins/MyOnChangePlugin";
 import { editorConfig } from "./config/editorConfig";
 import { EditorState } from "lexical";
 
+import "./index.scss";
+import { pinoLogger } from "log";
 const placeholder = "Enter some rich text...";
 
 interface AppProps {
-    saveState?: (state: string) => void;
+    saveState?: (state: any) => void;
 }
 
-const App: React.FC<AppProps> = ({ saveState = (x) => { } }) => {
-    // const [editorState, setEditorState] = useState<EditorState | undefined>(
-    //     undefined,
-    // );
+const App: React.FC<AppProps> = ({ saveState = () => { } }) => {
 
     const onChange = (editorState: EditorState) => {
         const editorStateJSON = editorState.toJSON();
-        return saveState(JSON.stringify(editorStateJSON));
-        // setEditorState(editorState);
+        pinoLogger.info(editorStateJSON)
+        return saveState(editorStateJSON)
+        // return saveState(JSON.stringify(editorStateJSON));
     };
 
     return (
