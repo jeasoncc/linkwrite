@@ -1,11 +1,9 @@
-import FooBar from "./foo-bar";
-
+import { Main as DiaryApp } from "diaryapp";
 function App() {
-
   return (
-    <div className="container">
-      <FooBar />
-    </div>
+    <>
+      <DiaryApp />
+    </>
   );
 }
 

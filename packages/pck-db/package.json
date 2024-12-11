@@ -1,0 +1,16 @@
+{
+  "name": "pck-db",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "rxdb": "^15.39.0",
+    "pck-log": "1.0.0"
+  }
+}

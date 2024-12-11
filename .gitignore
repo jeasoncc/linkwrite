@@ -47,3 +47,5 @@ package-lock.json
 .idea
 yarn.lock
 bun.lockb
+.yarn
+.yarnrc

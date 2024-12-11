@@ -1,0 +1,19 @@
+{
+  "name": "diaryapp",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "pck-ui": "1.0.0",
+    "pck-core": "1.0.0",
+    "pck-db": "1.0.0",
+    "pck-log": "1.0.0",
+    "pck-utils": "1.0.0"
+  }
+}

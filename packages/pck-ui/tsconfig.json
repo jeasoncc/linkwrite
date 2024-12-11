@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "jsx": "react", // 或者 "react-jsx" 如果你使用的是 React 17+
+    "moduleResolution": "Bundler",
+    "skipLibCheck": true
+  }
+}
