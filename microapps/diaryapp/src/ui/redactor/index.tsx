@@ -9,18 +9,15 @@ import "./index.scss";
 import { pinoLogger } from "pck-log";
 import { LexicalApp } from "pck-core";
 
-
 const Redactor: React.FC = () => {
   const saveState = (state: any) => {
-    pinoLogger.info("document has changed!")
+    pinoLogger.info("document has changed!");
   };
 
   useEffect(() => {
     // 订阅集合对象
-
     // 组件卸载时取消订阅
   }, []);
-
 
   return (
     <div className="redactor__container">

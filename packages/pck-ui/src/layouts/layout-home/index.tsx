@@ -9,13 +9,20 @@ import "./index.scss";
 
 interface LayoutHome {
   main?: ReactNode;
+  activity?: ReactNode;
   sidebar?: ReactNode;
   outline?: ReactNode;
 }
-const LayoutHome: React.FC<LayoutHome> = ({ main, sidebar, outline }) => {
+const LayoutHome: React.FC<LayoutHome> = ({
+  main,
+  activity,
+  sidebar,
+  outline,
+}) => {
   return (
     <div className="layout-home__container">
       <Flex justify="space-between">
+        {activity}
         {sidebar}
         {main}
         {outline}

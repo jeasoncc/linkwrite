@@ -18,10 +18,7 @@ const SidebarFile: React.FC<SidebarFile> = ({ list }) => {
         <Menu>
           <SubMenu label="diary">
             {list.map((item, index: number) => (
-              <div
-                key={index}
-                className="test__item"
-              >
+              <div key={index} className="test__item">
                 <MenuItem>{item?._data.createTime}</MenuItem>
               </div>
             ))}
