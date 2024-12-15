@@ -1,3 +1,5 @@
-[{"firstName": "FirstName1", "lastName": "LastName1"},
-{"firstName": "FirstName2", "lastName": "LastName2"},
-{"firstName": "FirstName3", "lastName": "LastName3"}]
+[
+  { "firstName": "FirstName1", "lastName": "LastName1" },
+  { "firstName": "FirstName2", "lastName": "LastName2" },
+  { "firstName": "FirstName3", "lastName": "LastName3" }
+]

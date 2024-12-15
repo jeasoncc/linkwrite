@@ -4848,11 +4848,6 @@ oblivious-set@1.4.0:
   resolved "https://registry.npmmirror.com/oblivious-set/-/oblivious-set-1.4.0.tgz"
   integrity sha512-szyd0ou0T8nsAqHtprRcP3WidfsN1TnAR5yWXf2mFCEr5ek3LEOkT6EZ/92Xfs74HIdyhG5WkGxIssMU0jBaeg==
 
-observable-hooks@^4.2.4:
-  version "4.2.4"
-  resolved "https://registry.npmmirror.com/observable-hooks/-/observable-hooks-4.2.4.tgz"
-  integrity sha512-FdTQgyw1h5bG/QHCBIqctdBSnv9VARJCEilgpV6L2qlw1yeLqFIwPm4U15dMtl5kDmNN0hSt+Nl6iYbLFwEcQA==
-
 ohash@1.1.4:
   version "1.1.4"
   resolved "https://registry.npmmirror.com/ohash/-/ohash-1.1.4.tgz"
@@ -5378,7 +5373,7 @@ rollup@^4.20.0:
 
 rxdb@^15.39.0:
   version "15.39.0"
-  resolved "https://registry.npmmirror.com/rxdb/-/rxdb-15.39.0.tgz"
+  resolved "https://registry.npmmirror.com/rxdb/-/rxdb-15.39.0.tgz#5cc1069464be44887b4b7291be90bf7743d10b9e"
   integrity sha512-CDcPsQq9yofJC9edAbXQNs3REhrVHoS2AHM4a6NxxJ8ZHJUlx5JCYukhRHruYmz8GYnowbZHufrxqFjVJLfINw==
   dependencies:
     "@babel/runtime" "7.26.0"

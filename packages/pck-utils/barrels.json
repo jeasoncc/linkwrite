@@ -1,0 +1,5 @@
+{
+  "directory": ["./src/", "."],
+  "exclude": ["test.ts", "scheme.ts"],
+  "delete": true
+}

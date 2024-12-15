@@ -1,1 +1,7 @@
-** This is a test monorepo repositry.
+* 一个为了定制化写作而作的软件
+
+** 如何使用？
+
+#+begin_src
+yarn && yarn dev
+#+end_src

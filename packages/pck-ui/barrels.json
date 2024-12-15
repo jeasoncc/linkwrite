@@ -1,9 +1,5 @@
 {
-  "directory": [
-    "./src/components/",
-    "./src/",
-    "."
-  ],
-"exclude": ["test.ts", "scheme.ts"],
+  "directory": ["./src/components/", "./src/", "."],
+  "exclude": ["test.ts", "scheme.ts"],
   "delete": true
 }

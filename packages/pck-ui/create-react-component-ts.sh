@@ -8,7 +8,7 @@ fi
 
 # 将所有参数合并为一个以横杠连接的名称
 component_name=$(echo "$@" | tr ' ' '-')
-component_dir="src/$component_name"
+component_dir="src/pro-components/$component_name"
 
 # 将组件名称转换为大驼峰命名法
 component_name_camel=$(echo "$component_name" | awk -F- '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2); print $0}' OFS='')

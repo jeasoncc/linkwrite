@@ -8,11 +8,10 @@ import { fromEvent } from "rxjs";
 import { debounceTime, throttleTime } from "rxjs/operators";
 import "./index.scss";
 // 模拟数据
-import { Item } from "./index.scheme";
-import { LexicalApp } from "pck-core";
 import SidebarFile from "pck-ui/src/pro-components/sidebar-file";
 import LayoutHome from "pck-ui/src/layouts/layout-home";
 import SidebarFeature from "pck-ui/src/pro-components/sidebar-feature";
+import FooBar from "../foo-bar";
 
 const ContentPane: React.FC = () => {
   useEffect(() => {
@@ -30,15 +29,11 @@ const ContentPane: React.FC = () => {
     };
   }, []);
 
-  const handleClick = (item: Item) => {
-    console.log("Clicked item:", item);
-  };
-
   return (
     <div className="content-pane__container">
       <LayoutHome
         sidebar={<SidebarFeature />}
-        main={<LexicalApp />}
+        main={<FooBar />}
         outline={<SidebarFile />}
       />
     </div>

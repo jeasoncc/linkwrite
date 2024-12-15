@@ -1,32 +1,34 @@
 module.exports = {
   // 指定测试环境
-  preset: 'ts-jest',
-  testEnvironment: 'node',
+  preset: "ts-jest",
+  testEnvironment: "node",
 
   // 匹配测试文件的模式
-  testMatch: ['**/__tests__/**/*.ts?(x)', '**/?(*.)+(spec|test).ts?(x)'],
+  testMatch: ["**/__tests__/**/*.ts?(x)", "**/?(*.)+(spec|test).ts?(x)"],
 
   // 转换器设置
   transform: {
-      '^.+\\.tsx?$': ['ts-jest', {
-          tsconfig: 'tsconfig.json',
-      }],
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        tsconfig: "tsconfig.json",
+      },
+    ],
   },
 
   // 模块文件扩展名
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
 
   // 覆盖率报告
   collectCoverage: true,
-  coverageDirectory: 'coverage',
-  coverageReporters: ['text', 'lcov'],
+  coverageDirectory: "coverage",
+  coverageReporters: ["text", "lcov"],
 
   // 忽略的文件或目录
-  coveragePathIgnorePatterns: ['/node_modules/', '/test/'],
+  coveragePathIgnorePatterns: ["/node_modules/", "/test/"],
 
   // 全局设置
-  globals: {
-  },
+  globals: {},
 };
 
 // module.exports = {
@@ -44,4 +46,3 @@ module.exports = {
 //     },
 //   },
 // };
-

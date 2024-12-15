@@ -24,43 +24,44 @@ import { pinoLogger } from "pck-log";
 const placeholder = "Enter some rich text...";
 
 interface AppProps {
-    saveState?: (state: any) => void;
+  saveState?: (state: any) => void;
 }
 
-const App: React.FC<AppProps> = ({ saveState = () => { } }) => {
+const App: React.FC<AppProps> = ({ saveState = () => {} }) => {
+  pinoLogger.info("haha coming");
+  const onChange = (editorState: EditorState) => {
+    const editorStateJSON = editorState.toJSON();
+    pinoLogger.info("every minutes auto saved");
+    pinoLogger.info(editorStateJSON);
+    return saveState(editorStateJSON);
+    // return saveState(JSON.stringify(editorStateJSON));
+  };
 
-    const onChange = (editorState: EditorState) => {
-        const editorStateJSON = editorState.toJSON();
-        pinoLogger.info(editorStateJSON)
-        return saveState(editorStateJSON)
-        // return saveState(JSON.stringify(editorStateJSON));
-    };
-
-    return (
-        <LexicalComposer initialConfig={editorConfig}>
-            <div className="editor-container">
-                <ToolbarPlugin />
-                <div className="editor-inner">
-                    <RichTextPlugin
-                        contentEditable={
-                            <ContentEditable
-                                className="editor-input"
-                                aria-placeholder={placeholder}
-                                placeholder={
-                                    <div className="editor-placeholder">{placeholder}</div>
-                                }
-                            />
-                        }
-                        ErrorBoundary={LexicalErrorBoundary}
-                    />
-                    <HistoryPlugin />
-                    <AutoFocusPlugin />
-                    <MyOnChangePlugin onChange={onChange} />
-                    <TreeViewPlugin />
-                </div>
-            </div>
-        </LexicalComposer>
-    );
+  return (
+    <LexicalComposer initialConfig={editorConfig}>
+      <div className="editor-container">
+        <ToolbarPlugin />
+        <div className="editor-inner">
+          <RichTextPlugin
+            contentEditable={
+              <ContentEditable
+                className="editor-input"
+                aria-placeholder={placeholder}
+                placeholder={
+                  <div className="editor-placeholder">{placeholder}</div>
+                }
+              />
+            }
+            ErrorBoundary={LexicalErrorBoundary}
+          />
+          <HistoryPlugin />
+          <AutoFocusPlugin />
+          <MyOnChangePlugin onChange={onChange} />
+          <TreeViewPlugin />
+        </div>
+      </div>
+    </LexicalComposer>
+  );
 };
 
 export default App;

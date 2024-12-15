@@ -1,3 +1,3 @@
 import Main from "./src/main";
 
-export { Main }
+export { Main };

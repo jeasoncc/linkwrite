@@ -1,26 +1,26 @@
 {
-   "$schema": "https://turbo.build/schema.json",
-   "ui": "tui",
-   "tasks": {
-     "build": {
-       "dependsOn": ["^build"],
-       "outputs": ["dist/[**"]
-     },
-     "lint": {
-       "dependsOn": ["^lint"]
-     },
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/[**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
     "preview": {
       "dependsOn": ["build"]
     },
-     "dev": {
+    "dev": {
       "dependsOn": ["^dev"],
-       "cache": false,
-       "persistent": true
-     },
-     "tauri": {
+      "cache": false,
+      "persistent": true
+    },
+    "tauri": {
       "dependsOn": ["^tauri"],
-       "cache": false,
-       "persistent": true
-     }
-   }
- }
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

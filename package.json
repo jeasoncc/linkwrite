@@ -6,7 +6,7 @@
     "dev": "turbo run dev --parallel",
     "build": "turbo build",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,json,js,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,scss,json,js,md}\""
   },
   "author": "",
   "license": "ISC",

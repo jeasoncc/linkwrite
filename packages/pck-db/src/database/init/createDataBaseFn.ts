@@ -3,11 +3,10 @@ import { encryptedDexieStorage } from "./encryptedDexieStorage";
 
 export const createDataBaseFn = async () => {
   const myDatabase = await createRxDatabase({
-    name: 'mydatabase',
+    name: "mydatabase",
     storage: encryptedDexieStorage,
-    password: 'sudoLetMeIn',
-    ignoreDuplicate: true
+    password: "sudoLetMeIn",
+    ignoreDuplicate: true,
   });
   return myDatabase;
 };
-

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
+    "generate-barrels": "barrelsby --config ./barrels.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,5 +12,9 @@
   "description": "",
   "dependencies": {
     "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "barrelsby": "^2.8.1",
+    "pck-ui": "1.0.0"
   }
 }

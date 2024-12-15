@@ -1,7 +1,7 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import SidebarFeature from './index';
+import React from "react";
+import { render } from "@testing-library/react";
+import SidebarFeature from "./index";
 
-test('renders component', () => {
-    render(<SidebarFeature />);
+test("renders component", () => {
+  render(<SidebarFeature />);
 });
