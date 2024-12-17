@@ -8,57 +8,36 @@ import "./index.scss";
 
 import Redactor from "../redactor";
 import LayoutHome from "pck-ui/src/layouts/layout-home";
-import SidebarFeature from "pck-ui/src/pro-components/sidebar-feature";
 import SidebarFile from "pck-ui/src/pro-components/sidebar-file";
 import SidebarActivity from "pck-ui/src/pro-components/sidebar-activity";
-import { Button, toaster, Toaster } from "pck-ui";
+import { incoListFn } from "pck-ui";
 import { createDocumentFn, findDocumentFn } from "pck-db";
+import Outline from "pck-ui/src/pro-components/outline";
+import { pinoLogger } from "pck-log";
 
 const Home: React.FC = () => {
   const [data, setData] = useState([]);
+  const [iconList] = useState(() => incoListFn({ createDocumentFn }));
+
   useEffect(() => {
     const subscription = findDocumentFn().subscribe({
-      next: (docs) => setData(docs),
+      next: (docs) => {
+        pinoLogger.info("Documents updated:" + docs);
+        setData(docs);
+      },
       error: (error) => console.error("Error fetching data:", error),
     });
 
     // 清理订阅
     return () => subscription.unsubscribe();
   }, []); // 空数组作为依赖项，确保只在组件挂载时执行一次
-  const handleClick = () => {
-    createDocumentFn();
 
-    toaster.create({
-      description: "File saved successfully",
-      type: "success",
-    });
-    const subscription = findDocumentFn().subscribe({
-      next: (docs) => setData(docs),
-      error: (error) => console.error("Error fetching data:", error),
-    });
-
-    // 清理订阅
-    return () => subscription.unsubscribe();
-  };
-
-  const findClick = () => {};
   return (
     <div className="home__container">
       <h1>home</h1>
-      <Button colorPalette="teal" onClick={handleClick}>
-        {" "}
-        insert diary
-      </Button>
-      <Toaster />
-      <br />
-      <br />
-      <Button colorPalette="teal" onClick={findClick}>
-        find diary{" "}
-      </Button>
-      Sidebar
       <LayoutHome
-        activity={<SidebarActivity />}
-        sidebar={<SidebarFeature />}
+        activity={<SidebarActivity iconList={iconList} />}
+        sidebar={<Outline />}
         main={<Redactor />}
         outline={<SidebarFile list={data} />}
       />

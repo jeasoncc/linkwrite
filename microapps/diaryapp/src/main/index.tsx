@@ -4,17 +4,13 @@
 // 描述: 这是一个自动生成的组件文件
 
 import React, { useEffect } from "react";
-import "./index.scss";
 import Home from "../ui/home";
 import { Provider } from "pck-ui";
 
 const Main: React.FC = () => {
   return (
     <Provider>
-      <div className="main__container">
-        <h1>main</h1>
-        <Home />
-      </div>
+      <Home />
     </Provider>
   );
 };

@@ -55,6 +55,8 @@ export * from "./src/components/ui/toggle";
 export * from "./src/components/ui/tooltip";
 export * from "./src/layouts/layout-home/index";
 export * from "./src/pro-components/drawer/index";
+export * from "./src/pro-components/outline/index";
+export * from "./src/pro-components/sidebar-activity/incoList.fn";
 export * from "./src/pro-components/sidebar-activity/index";
 export * from "./src/pro-components/sidebar-feature/index";
 export * from "./src/pro-components/sidebar-file/index";

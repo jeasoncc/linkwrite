@@ -3,40 +3,26 @@
 // 创建日期: 2024-12-15 18:48:13
 // 描述: 这是一个自动生成的组件文件
 
-import React, { useEffect } from "react";
-import { fromEvent } from "rxjs";
-import { debounceTime, throttleTime } from "rxjs/operators";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 
-import { Item } from "./index.scheme";
-import { Box, IconButton, Stack, VStack } from "@chakra-ui/react";
-import {
-  HiDocument,
-  HiDocumentRemove,
-  HiSearch,
-} from "react-icons/hi";
+import { Box, IconButton, VStack } from "@chakra-ui/react";
 import { Tooltip } from "../../components/ui/tooltip";
 
-const SidebarActivity: React.FC = () => {
-  useEffect(() => {
-    const clickStream = fromEvent(document, "click").pipe(
-      debounceTime(300),
-      throttleTime(500),
-    );
+interface IconItem {
+  content: string;
+  onclickFn: () => void;
+  icon: React.ReactNode;
+}
 
-    const subscription = clickStream.subscribe(() => {
-      console.log("Document clicked!");
-    });
+interface SidebarActivityProps {
+  iconList?: IconItem[];
+}
 
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
-
-  const handleClick = (item: Item) => {
-    console.log("Clicked item:", item);
-  };
-
+const SidebarActivity: React.FC<SidebarActivityProps> = ({ iconList = [] }) => {
+  /* useEffect(() => {
+   *   setIconList(incoListFn());
+   * }, []); */
   return (
     <div className="sidebar-activity__container">
       <Box
@@ -47,56 +33,25 @@ const SidebarActivity: React.FC = () => {
         borderWidth="1px"
       >
         <VStack>
-          <Tooltip
-            content="Add a new Document"
-            positioning={{ placement: "top" }}
-            openDelay={100}
-            closeDelay={10}
-          >
-            <IconButton aria-label="Search database">
-              <HiDocument />
-            </IconButton>
-          </Tooltip>
-          <IconButton aria-label="Search database">
-            <HiSearch />
-          </IconButton>
-          <IconButton aria-label="Search database">
-            <HiDocumentRemove />
-          </IconButton>
-          <IconButton aria-label="Search database">
-            <HiDocumentRemove />
-          </IconButton>
-          <IconButton aria-label="Search database">
-            <HiDocumentRemove />
-          </IconButton>
-          <IconButton aria-label="Search database">
-            <HiDocumentRemove />
-          </IconButton>
-          <IconButton aria-label="Search database">
-            <HiDocumentRemove />
-          </IconButton>
-          <IconButton aria-label="Search database">
-            <HiDocumentRemove />
-          </IconButton>
-          <IconButton aria-label="Search database">
-            <HiDocumentRemove />
-          </IconButton>
-          <IconButton aria-label="Search database">
-            <HiDocumentRemove />
-          </IconButton>
-          <IconButton aria-label="Search database">
-            <HiDocumentRemove />
-          </IconButton>
-          <IconButton aria-label="Search database">
-            <HiDocumentRemove />
-          </IconButton>
-          <IconButton aria-label="Search database">
-            <HiDocumentRemove />
-          </IconButton>
+          {iconList.map((iconItem, index: number) => (
+            <Tooltip
+              content={iconItem.content}
+              positioning={{ placement: "right" }}
+              openDelay={100}
+              closeDelay={10}
+              key={index}
+            >
+              <IconButton
+                aria-label={iconItem.content}
+                onClick={iconItem.onclickFn}
+              >
+                {iconItem.icon}
+              </IconButton>
+            </Tooltip>
+          ))}
         </VStack>
       </Box>
     </div>
   );
 };
-
 export default SidebarActivity;
