@@ -7,6 +7,7 @@ import React from "react";
 import "./index.scss";
 import { Box, List, VStack } from "@chakra-ui/react";
 import { LuCircleCheckBig } from "react-icons/lu";
+import { Blockquote } from "../../components/ui/blockquote";
 
 interface ItemInterface {
   id: string;
@@ -15,8 +16,18 @@ interface ItemInterface {
 }
 interface SidebarFile {
   list?: ItemInterface[];
+  openFileFn?: Function;
 }
-const SidebarFile: React.FC<SidebarFile> = ({ list = [] }) => {
+const NullFile: React.FC = ({}) => {
+  return (
+    <Blockquote showDash cite="Uzumaki Naruto">
+      阳光照在每一个人的脸上
+      <br /> 无论它是圣人还是罪人
+    </Blockquote>
+  );
+};
+
+const SidebarFile: React.FC<SidebarFile> = ({ list = [], openFileFn }) => {
   return (
     <div className="sidebar-file__container">
       <h1>sidebar-file</h1>
@@ -28,16 +39,20 @@ const SidebarFile: React.FC<SidebarFile> = ({ list = [] }) => {
         borderWidth="1px"
       >
         <VStack>
-          <List.Root gap="2" variant="plain" align="center">
-            {list.map((item, index: number) => (
-              <List.Item key={index}>
-                <List.Indicator asChild color="green.500">
-                  <LuCircleCheckBig />
-                </List.Indicator>
-                {item?.createTime}
-              </List.Item>
-            ))}
-          </List.Root>
+          {!list.length ? (
+            <NullFile />
+          ) : (
+            <List.Root gap="2" variant="plain" align="center">
+              {list.map((item, index: number) => (
+                <List.Item key={index} onClick={() => openFileFn(item)}>
+                  <List.Indicator asChild color="green.500">
+                    <LuCircleCheckBig />
+                  </List.Indicator>
+                  {item?.createTime}
+                </List.Item>
+              ))}
+            </List.Root>
+          )}
         </VStack>
       </Box>
     </div>

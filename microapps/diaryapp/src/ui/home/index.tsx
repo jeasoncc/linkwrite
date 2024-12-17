@@ -11,10 +11,14 @@ import LayoutHome from "pck-ui/src/layouts/layout-home";
 import SidebarFile from "pck-ui/src/pro-components/sidebar-file";
 import SidebarActivity from "pck-ui/src/pro-components/sidebar-activity";
 import { incoListFn } from "pck-ui";
-import { createDocumentFn, findDocumentFn } from "pck-db";
+import { createDocumentFn, findDocumentFn, updateFileCache } from "pck-db";
 import Outline from "pck-ui/src/pro-components/outline";
 import { pinoLogger } from "pck-log";
 
+const openFileFn = (item) => {
+  console.log(item);
+  updateFileCache(item);
+};
 const Home: React.FC = () => {
   const [data, setData] = useState([]);
   const [iconList] = useState(() => incoListFn({ createDocumentFn }));
@@ -39,7 +43,7 @@ const Home: React.FC = () => {
         activity={<SidebarActivity iconList={iconList} />}
         sidebar={<Outline />}
         main={<Redactor />}
-        outline={<SidebarFile list={data} />}
+        outline={<SidebarFile list={data} openFileFn={openFileFn} />}
       />
     </div>
   );

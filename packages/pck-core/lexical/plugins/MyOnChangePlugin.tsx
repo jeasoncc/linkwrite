@@ -67,7 +67,7 @@ export const MyOnChangePlugin: React.FC<MyOnChangePluginProps> = ({
 
   useEffect(() => {
     const subscription = editorStateSubject
-      .pipe(throttleTime(5000)) // 每1分钟限流一次
+      .pipe(throttleTime(1000)) // 每1分钟限流一次
       .subscribe((editorState) => {
         onChange(editorState);
       });

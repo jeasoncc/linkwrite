@@ -27,12 +27,10 @@ interface AppProps {
   saveState?: (state: any) => void;
 }
 
-const App: React.FC<AppProps> = ({ saveState = () => {} }) => {
-  pinoLogger.info("haha coming");
+const App: React.FC<AppProps> = ({ saveState }) => {
   const onChange = (editorState: EditorState) => {
     const editorStateJSON = editorState.toJSON();
     pinoLogger.info("every minutes auto saved");
-    pinoLogger.info(editorStateJSON);
     return saveState(editorStateJSON);
     // return saveState(JSON.stringify(editorStateJSON));
   };
