@@ -1,5 +1,5 @@
 {
-  "name": "pck-db",
+  "name": "pck-schema",
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
@@ -9,14 +9,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "rxdb": "^15.39.0",
-    "pck-schema": "1.0.0",
-    "pck-log": "1.0.0"
-  },
-  "devDependencies": {
-    "barrelsby": "^2.8.1",
-    "pck-ui": "1.0.0"
-  }
+  "description": ""
 }

@@ -11,7 +11,7 @@ import LayoutHome from "pck-ui/src/layouts/layout-home";
 import SidebarFile from "pck-ui/src/pro-components/sidebar-file";
 import SidebarActivity from "pck-ui/src/pro-components/sidebar-activity";
 import { incoListFn } from "pck-ui";
-import { createDocumentFn, findDocumentFn, updateFileCache } from "pck-db";
+import { createDocumentFn, DraftInterface, findAllDocumentFn, updateFileCache } from "pck-db";
 import Outline from "pck-ui/src/pro-components/outline";
 import { pinoLogger } from "pck-log";
 
@@ -20,14 +20,14 @@ const openFileFn = (item) => {
   updateFileCache(item);
 };
 const Home: React.FC = () => {
-  const [data, setData] = useState([]);
+  const [drafts, setDrafts] = useState<DraftInterface[]>([]);
   const [iconList] = useState(() => incoListFn({ createDocumentFn }));
 
   useEffect(() => {
-    const subscription = findDocumentFn().subscribe({
+    const subscription = findAllDocumentFn().subscribe({
       next: (docs) => {
         pinoLogger.info("Documents updated:" + docs);
-        setData(docs);
+        setDrafts(docs);
       },
       error: (error) => console.error("Error fetching data:", error),
     });
@@ -41,9 +41,9 @@ const Home: React.FC = () => {
       <h1>home</h1>
       <LayoutHome
         activity={<SidebarActivity iconList={iconList} />}
-        sidebar={<Outline />}
+        sidebar={<SidebarFile list={drafts} openFileFn={openFileFn} />}
         main={<Redactor />}
-        outline={<SidebarFile list={data} openFileFn={openFileFn} />}
+        outline={<Outline />}
       />
     </div>
   );

@@ -12,9 +12,4 @@ export async function initDatabaseFn() {
     },
   });
   return db[DB_NAME];
-
-  // await myDocument.modify(docData => {
-  //   docData.done = true;
-  //   return docData;
-  // });
 }

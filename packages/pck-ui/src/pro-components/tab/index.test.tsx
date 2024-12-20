@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Outline from "./index";
+import Tab from "./index";
 
 test("renders component", () => {
-  render(<Outline />);
+  render(<Tab />);
 });

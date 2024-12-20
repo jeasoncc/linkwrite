@@ -8,9 +8,8 @@ import "./index.scss";
 
 import { pinoLogger } from "pck-log";
 import { LexicalApp } from "pck-core";
-import { Alert, Button } from "pck-ui";
-
 import { getFileCache } from "pck-db";
+import TabCore from "pck-ui/src/pro-components/tab-core";
 
 const Redactor: React.FC = () => {
   const saveState = (state: any) => {
@@ -20,19 +19,15 @@ const Redactor: React.FC = () => {
   useEffect(() => {
     // 订阅集合对象
     const subscription = getFileCache().subscribe(setFileCache);
-    console.log(fileCache);
     return () => subscription.unsubscribe(); // 组件卸载时取消订阅
   }, []);
 
   return (
     <div className="redactor__container">
-      {fileCache.map((file, index) => (
-        <div key={index}>{file.id}</div>
-      ))}
-      <Alert status="success" title="Invalid Fields">
-        Your form has some errors. Please fix them and try again.
-      </Alert>
-      <LexicalApp saveState={saveState} />
+      <TabCore
+        items={fileCache}
+        lexical={<LexicalApp saveState={saveState} />}
+      />
     </div>
   );
 };

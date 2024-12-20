@@ -60,3 +60,5 @@ export * from "./src/pro-components/sidebar-activity/incoList.fn";
 export * from "./src/pro-components/sidebar-activity/index";
 export * from "./src/pro-components/sidebar-feature/index";
 export * from "./src/pro-components/sidebar-file/index";
+export * from "./src/pro-components/tab/index";
+export * from "./src/pro-components/tab-core/index";

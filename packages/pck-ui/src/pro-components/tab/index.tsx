@@ -1,6 +1,6 @@
-// 组件名称: outline
+// 组件名称: tab
 // 作者: Martin
-// 创建日期: 2024-12-16 16:00:32
+// 创建日期: 2024-12-18 16:50:15
 // 描述: 这是一个自动生成的组件文件
 
 import React, { useEffect } from "react";
@@ -12,7 +12,7 @@ import "./index.scss";
 import items from "./data.json";
 import { Item } from "./index.scheme";
 
-const Outline: React.FC = () => {
+const Tab: React.FC = () => {
   useEffect(() => {
     const clickStream = fromEvent(document, "click").pipe(
       debounceTime(300),
@@ -33,12 +33,12 @@ const Outline: React.FC = () => {
   };
 
   return (
-    <div className="outline__container">
-      <h1>outline</h1>
+    <div className="tab__container">
+      <h1>tab</h1>
       {items.map((item: Item, index: number) => (
         <div
           key={index}
-          className="outline__item"
+          className="tab__item"
           onClick={() => handleClick(item)}
         >
           {item.firstName} {item.lastName}
@@ -48,4 +48,4 @@ const Outline: React.FC = () => {
   );
 };
 
-export default Outline;
+export default Tab;
