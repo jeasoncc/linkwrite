@@ -11,29 +11,29 @@ import LayoutHome from "pck-ui/src/layouts/layout-home";
 import SidebarFile from "pck-ui/src/pro-components/sidebar-file";
 import SidebarActivity from "pck-ui/src/pro-components/sidebar-activity";
 import { incoListFn } from "pck-ui";
-import { createDocumentFn, DraftInterface, findAllDocumentFn, updateFileCache } from "pck-db";
 import Outline from "pck-ui/src/pro-components/outline";
 import { pinoLogger } from "pck-log";
 
-const openFileFn = (item) => {
-  console.log(item);
-  updateFileCache(item);
-};
+// const openFileFn = (item) => {
+//   console.log(item);
+//   updateFileCache(item);
+// };
 const Home: React.FC = () => {
-  const [drafts, setDrafts] = useState<DraftInterface[]>([]);
-  const [iconList] = useState(() => incoListFn({ createDocumentFn }));
-
+  const [drafts, setDrafts] = useState([]);
+  const [iconList, setIconList] = useState([]);
+  const [openFileFn, setOpenFileFn] = useState();
+  // () => incoListFn({ createDocumentFn })
   useEffect(() => {
-    const subscription = findAllDocumentFn().subscribe({
-      next: (docs) => {
-        pinoLogger.info("Documents updated:" + docs);
-        setDrafts(docs);
-      },
-      error: (error) => console.error("Error fetching data:", error),
-    });
-
-    // 清理订阅
-    return () => subscription.unsubscribe();
+    // const subscription = findAllDocumentFn().subscribe({
+    //   next: (docs) => {
+    //     pinoLogger.info("Documents updated:" + docs);
+    //     setDrafts(docs);
+    //   },
+    //   error: (error) => console.error("Error fetching data:", error),
+    // });
+    //
+    // // 清理订阅
+    // return () => subscription.unsubscribe();
   }, []); // 空数组作为依赖项，确保只在组件挂载时执行一次
 
   return (

@@ -5,22 +5,17 @@
 
 import React, { useEffect, useState } from "react";
 import "./index.scss";
-
-import { pinoLogger } from "pck-log";
 import { LexicalApp } from "pck-core";
-import { getFileCache } from "pck-db";
 import TabCore from "pck-ui/src/pro-components/tab-core";
 
 const Redactor: React.FC = () => {
-  const saveState = (state: any) => {
-    pinoLogger.info("document has changed!");
-  };
   const [fileCache, setFileCache] = useState([]);
-  useEffect(() => {
-    // 订阅集合对象
-    const subscription = getFileCache().subscribe(setFileCache);
-    return () => subscription.unsubscribe(); // 组件卸载时取消订阅
-  }, []);
+  const [saveState, setSaveState] = useState();
+  // useEffect(() => {
+  //   // 订阅集合对象
+  //   const subscription = getFileCache().subscribe(setFileCache);
+  //   return () => subscription.unsubscribe(); // 组件卸载时取消订阅
+  // }, []);
 
   return (
     <div className="redactor__container">

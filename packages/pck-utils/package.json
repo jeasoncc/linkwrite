@@ -11,6 +11,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "pck-db": "1.0.0",
+    "pck-store": "1.0.0",
     "uuid": "^11.0.3"
   },
   "devDependencies": {

@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "turbo run dev --parallel",
+    "generate-barrels": "turbo run generate-barrels",
     "build": "turbo build",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,scss,json,js,md}\""

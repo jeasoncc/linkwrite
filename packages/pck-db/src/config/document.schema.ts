@@ -1,4 +1,4 @@
-export const documentSchema = {
+export const DRAFTSCHEMA = {
   version: 0,
   title: "Lexical Data Schema",
   primaryKey: "id",

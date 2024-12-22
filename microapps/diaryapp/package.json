@@ -12,6 +12,7 @@
   "dependencies": {
     "pck-core": "1.0.0",
     "pck-db": "1.0.0",
+    "pck-store": "1.0.0",
     "pck-log": "1.0.0",
     "pck-ui": "1.0.0",
     "pck-utils": "1.0.0"

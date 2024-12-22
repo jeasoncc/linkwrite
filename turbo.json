@@ -17,10 +17,9 @@
       "cache": false,
       "persistent": true
     },
-    "tauri": {
-      "dependsOn": ["^tauri"],
-      "cache": false,
-      "persistent": true
+    "generate-barrels": {
+      "dependsOn": ["generate-barrels"],
+      "cache": false
     }
   }
 }

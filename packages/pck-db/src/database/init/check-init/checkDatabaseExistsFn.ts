@@ -1,5 +1,5 @@
 import { pinoLogger } from "pck-log";
-import { DB_NAME } from "../config/DBNAME";
+import { DB_NAME } from "../../../config/DBNAME";
 
 const checkDatabaseExistsFn = async (dbName: string) => {
   const databases = await window.indexedDB.databases();

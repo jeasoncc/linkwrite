@@ -1,5 +1,5 @@
 {
-  "directory": ["./src/collection/", "./src/database/", "."],
-  "exclude": ["test.ts", "./src/database/", "./src/store/"],
+  "directory": ["./src/collection/", "."],
+  "exclude": ["test.ts", "./src/database/"],
   "delete": true
 }

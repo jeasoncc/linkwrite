@@ -1,9 +1,10 @@
 {
   "name": "pck-log",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "build": "tsc",
+    "generate-barrels": "barrelsby --config ./barrels.json",
     "test": "jest"
   },
   "keywords": [],
