@@ -9,7 +9,7 @@ import { LexicalApp } from "pck-core";
 import TabCore from "pck-ui/src/pro-components/tab-core";
 
 const Redactor: React.FC = () => {
-  const [fileCache, setFileCache] = useState([]);
+  const [buffers, setBuffers] = useState([]);
   const [saveState, setSaveState] = useState();
   // useEffect(() => {
   //   // 订阅集合对象
@@ -19,10 +19,7 @@ const Redactor: React.FC = () => {
 
   return (
     <div className="redactor__container">
-      <TabCore
-        items={fileCache}
-        lexical={<LexicalApp saveState={saveState} />}
-      />
+      <TabCore items={buffers} lexical={<LexicalApp saveState={saveState} />} />
     </div>
   );
 };

@@ -3,7 +3,7 @@
 // 创建日期: 2024-12-15 18:48:13
 // 描述: 这是一个自动生成的组件文件
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./index.scss";
 
 import { Box, IconButton, VStack } from "@chakra-ui/react";

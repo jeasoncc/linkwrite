@@ -6,11 +6,11 @@
 import React, { useEffect } from "react";
 import Home from "../ui/home";
 import { Provider } from "pck-ui";
-import { initDBandStoreFn } from "pck-utils";
+import { initDBandStoreFn } from "pck-store";
 const Main: React.FC = () => {
   useEffect(() => {
-    initDBandStoreFn()
-  }, [])
+    initDBandStoreFn();
+  }, []);
   return (
     <Provider>
       <Home />

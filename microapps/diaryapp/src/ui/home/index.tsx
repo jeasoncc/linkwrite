@@ -10,9 +10,11 @@ import Redactor from "../redactor";
 import LayoutHome from "pck-ui/src/layouts/layout-home";
 import SidebarFile from "pck-ui/src/pro-components/sidebar-file";
 import SidebarActivity from "pck-ui/src/pro-components/sidebar-activity";
-import { incoListFn } from "pck-ui";
 import Outline from "pck-ui/src/pro-components/outline";
 import { pinoLogger } from "pck-log";
+import { IconItem, makeIncoListFn } from "pck-ui";
+import { utilsInitFn } from "pck-utils";
+import { collectionSubject, findAllDraftStoreFn, insertDraftFn } from "pck-store";
 
 // const openFileFn = (item) => {
 //   console.log(item);
@@ -20,10 +22,18 @@ import { pinoLogger } from "pck-log";
 // };
 const Home: React.FC = () => {
   const [drafts, setDrafts] = useState([]);
-  const [iconList, setIconList] = useState([]);
-  const [openFileFn, setOpenFileFn] = useState();
+  const [iconList, setIconList] = useState<IconItem[]>([]);
+  const [openDraftFn, setOpenDraftFn] = useState(utilsInitFn);
   // () => incoListFn({ createDocumentFn })
   useEffect(() => {
+    setIconList(
+      makeIncoListFn({
+        insertFn: () => insertDraftFn(collectionSubject),
+        deleteFn: utilsInitFn,
+        searchFn: utilsInitFn,
+      }),
+    );
+    // setOpenDraftFn(findAllDraftStoreFn(collectionSubject).subscribe())
     // const subscription = findAllDocumentFn().subscribe({
     //   next: (docs) => {
     //     pinoLogger.info("Documents updated:" + docs);
@@ -41,7 +51,7 @@ const Home: React.FC = () => {
       <h1>home</h1>
       <LayoutHome
         activity={<SidebarActivity iconList={iconList} />}
-        sidebar={<SidebarFile list={drafts} openFileFn={openFileFn} />}
+        sidebar={<SidebarFile list={drafts} openFileFn={openDraftFn} />}
         main={<Redactor />}
         outline={<Outline />}
       />

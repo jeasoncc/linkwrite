@@ -2,6 +2,6 @@
 
 ** 如何使用？
 
-#+begin_src
+#+begin_src js
 yarn && yarn dev
 #+end_src

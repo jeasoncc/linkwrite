@@ -57,7 +57,11 @@ export class DraftBuilder {
   }
 
   addComment(user: string, comment: string): DraftBuilder {
-    this.draft.comments.push({ user, comment, timestamp: new Date().toISOString() });
+    this.draft.comments.push({
+      user,
+      comment,
+      timestamp: new Date().toISOString(),
+    });
     return this;
   }
 
@@ -65,4 +69,3 @@ export class DraftBuilder {
     return this.draft;
   }
 }
-
