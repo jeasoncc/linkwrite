@@ -10,11 +10,15 @@ import Redactor from "../redactor";
 import LayoutHome from "pck-ui/src/layouts/layout-home";
 import SidebarFile from "pck-ui/src/pro-components/sidebar-file";
 import SidebarActivity from "pck-ui/src/pro-components/sidebar-activity";
-import Outline from "pck-ui/src/pro-components/outline";
+// import Outline from "pck-ui/src/pro-components/outline";
 import { pinoLogger } from "pck-log";
 import { IconItem, makeIncoListFn } from "pck-ui";
 import { utilsInitFn } from "pck-utils";
-import { collectionSubject, findAllDraftStoreFn, insertDraftFn } from "pck-store";
+import {
+  collectionSubject,
+  findAllDraftStoreFn,
+  insertDraftFn,
+} from "pck-store";
 
 // const openFileFn = (item) => {
 //   console.log(item);
@@ -53,7 +57,6 @@ const Home: React.FC = () => {
         activity={<SidebarActivity iconList={iconList} />}
         sidebar={<SidebarFile list={drafts} openFileFn={openDraftFn} />}
         main={<Redactor />}
-        outline={<Outline />}
       />
     </div>
   );
