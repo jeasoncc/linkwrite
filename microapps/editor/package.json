@@ -1,9 +1,8 @@
 {
-  "name": "pck-db",
+  "name": "editor",
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "generate-barrels": "barrelsby --config ./barrels.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,14 +10,14 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "better-sqlite3": "^11.9.1",
-    "knex": "^3.1.0",
+    "pck-core": "1.0.0",
+    "pck-db": "1.0.0",
+    "pck-store": "1.0.0",
     "pck-log": "1.0.0",
-    "pck-schema": "1.0.0",
-    "rxdb": "^15.39.0"
+    "pck-ui": "1.0.0",
+    "pck-utils": "1.0.0"
   },
   "devDependencies": {
-    "barrelsby": "^2.8.1",
-    "pck-ui": "1.0.0"
+    "rxdb": "^15.39.0"
   }
 }
