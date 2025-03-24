@@ -5,13 +5,13 @@
 
 import React, { useEffect } from "react";
 
-import { Provider } from "pck-ui";
 import { initDBandStoreFn } from "pck-store";
+
 const Main: React.FC = () => {
   useEffect(() => {
     initDBandStoreFn();
   }, []);
-  return <Provider>2121221</Provider>;
+  return <>21212121</>;
 };
 
 export default Main;

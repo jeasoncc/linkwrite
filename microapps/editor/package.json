@@ -10,12 +10,14 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@tailwindcss/vite": "^4.0.14",
     "pck-core": "1.0.0",
     "pck-db": "1.0.0",
-    "pck-store": "1.0.0",
     "pck-log": "1.0.0",
+    "pck-store": "1.0.0",
     "pck-ui": "1.0.0",
-    "pck-utils": "1.0.0"
+    "pck-utils": "1.0.0",
+    "tailwindcss": "^4.0.14"
   },
   "devDependencies": {
     "rxdb": "^15.39.0"

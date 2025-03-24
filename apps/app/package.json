@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^1",
-    "diaryapp": "1.0.0"
+    "diaryapp": "1.0.0",
+    "editor": "1.0.0"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1",
