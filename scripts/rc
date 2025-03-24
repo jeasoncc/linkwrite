@@ -1,0 +1,299 @@
+#!/bin/bash
+
+# 默认配置
+DEFAULT_LANGUAGE="ts"
+DEFAULT_STYLE_TYPE="scss"
+DEFAULT_OUTPUT_DIR="." # 当前目录
+DEFAULT_GENERATE_STORYBOOK=false
+DEFAULT_GENERATE_HOOK=false
+
+# 检查参数数量
+if [ "$#" -lt 1 ]; then
+    echo "用法: rc <组件名称> [--ts|--js] [--scss|--css|--module] [--output <目录>] [--storybook] [--hook]"
+    echo "示例:"
+    echo "  rc MyComponent --ts --scss --storybook --hook"
+    echo "  rc MyComponent --js --css --output ./src/components"
+    exit 1
+fi
+
+# 解析参数
+component_name=$(echo "$1" | tr ' ' '-')
+language="$DEFAULT_LANGUAGE"
+style_type="$DEFAULT_STYLE_TYPE"
+output_dir="$DEFAULT_OUTPUT_DIR"
+generate_storybook="$DEFAULT_GENERATE_STORYBOOK"
+generate_hook="$DEFAULT_GENERATE_HOOK"
+
+shift # 跳过组件名称参数
+
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --ts) language="ts" ;;
+        --js) language="js" ;;
+        --scss) style_type="scss" ;;
+        --css) style_type="css" ;;
+        --module) style_type="module.css" ;;
+        --output) output_dir="$2"; shift ;;
+        --storybook) generate_storybook=true ;;
+        --hook) generate_hook=true ;;
+        *) echo "未知参数: $1"; exit 1 ;;
+    esac
+    shift
+done
+
+# 将组件名称转换为大驼峰命名法
+component_name_camel=$(echo "$component_name" | awk -F- '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2); print $0}' OFS='')
+
+# 组件目录
+component_dir="$output_dir/$component_name"
+
+# 检查目录是否已存在
+if [ -d "$component_dir" ]; then
+    echo "错误: 目录 '$component_dir' 已存在，无法创建。"
+    exit 1
+fi
+
+# 创建目录
+mkdir -p "$component_dir"
+
+# 创建 React 文件
+react_file="$component_dir/index.$language"
+if [ "$language" == "ts" ]; then
+    cat <<EOL > "$react_file"
+import React, { useEffect } from 'react';
+import { fromEvent } from 'rxjs';
+import { debounceTime, throttleTime } from 'rxjs/operators';
+import './index.$style_type';
+
+// 模拟数据
+import items from './data.json';
+import { Item } from './index.scheme';
+
+const ${component_name_camel}: React.FC = () => {
+    useEffect(() => {
+        const clickStream = fromEvent(document, 'click').pipe(
+            debounceTime(300),
+            throttleTime(500)
+        );
+
+        const subscription = clickStream.subscribe(() => {
+            console.log('Document clicked!');
+        });
+
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, []);
+
+    const handleClick = (item: Item) => {
+        console.log('Clicked item:', item);
+    };
+
+    return (
+        <div className="${component_name}__container">
+            <h1>${component_name}</h1>
+            {items.map((item: Item, index: number) => (
+                <div
+                    key={index}
+                    className="${component_name}__item"
+                    onClick={() => handleClick(item)}
+                >
+                    {item.firstName} {item.lastName}
+                </div>
+            ))}
+        </div>
+    );
+};
+
+export default ${component_name_camel};
+EOL
+else
+    cat <<EOL > "$react_file"
+import React, { useEffect } from 'react';
+import { fromEvent } from 'rxjs';
+import { debounceTime, throttleTime } from 'rxjs/operators';
+import './index.$style_type';
+
+// 模拟数据
+import items from './data.json';
+
+const ${component_name_camel} = () => {
+    useEffect(() => {
+        const clickStream = fromEvent(document, 'click').pipe(
+            debounceTime(300),
+            throttleTime(500)
+        );
+
+        const subscription = clickStream.subscribe(() => {
+            console.log('Document clicked!');
+        });
+
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, []);
+
+    const handleClick = (item) => {
+        console.log('Clicked item:', item);
+    };
+
+    return (
+        <div className="${component_name}__container">
+            <h1>${component_name}</h1>
+            {items.map((item, index) => (
+                <div
+                    key={index}
+                    className="${component_name}__item"
+                    onClick={() => handleClick(item)}
+                >
+                    {item.firstName} {item.lastName}
+                </div>
+            ))}
+        </div>
+    );
+};
+
+export default ${component_name_camel};
+EOL
+fi
+
+# 创建样式文件
+style_file="$component_dir/index.$style_type"
+if [ "$style_type" == "scss" ]; then
+    cat <<EOL > "$style_file"
+.${component_name}__container {
+    padding: 20px;
+    border: solid 1px red;
+}
+
+.${component_name}__item {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #e0e0e0;
+    }
+}
+EOL
+elif [ "$style_type" == "css" ]; then
+    cat <<EOL > "$style_file"
+.${component_name}__container {
+    padding: 20px;
+    border: solid 1px red;
+}
+
+.${component_name}__item {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.${component_name}__item:hover {
+    background-color: #e0e0e0;
+}
+EOL
+else
+    cat <<EOL > "$style_file"
+.container {
+    padding: 20px;
+    border: solid 1px red;
+}
+
+.item {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.item:hover {
+    background-color: #e0e0e0;
+}
+EOL
+fi
+
+# 创建测试文件
+test_file="$component_dir/index.test.$language"
+cat <<EOL > "$test_file"
+import React from 'react';
+import { render } from '@testing-library/react';
+import ${component_name_camel} from './index';
+
+test('renders component', () => {
+    render(<${component_name_camel} />);
+});
+EOL
+
+# 创建 JSON 文件
+json_file="$component_dir/data.json"
+cat <<EOL > "$json_file"
+[$(for i in $(seq 1 3); do echo "{\"firstName\": \"FirstName$i\", \"lastName\": \"LastName$i\"},"; done | sed '$ s/,$//')]
+EOL
+
+# 创建类型声明文件（仅 TypeScript）
+if [ "$language" == "ts" ]; then
+    scheme_file="$component_dir/index.scheme.ts"
+    cat <<EOL > "$scheme_file"
+export interface Item {
+    firstName: string;
+    lastName: string;
+}
+EOL
+fi
+
+# 创建 README 文件
+readme_file="$component_dir/README.md"
+cat <<EOL > "$readme_file"
+# ${component_name}
+
+这是一个自动生成的 React 组件。
+
+## 用法
+
+\`\`\`$language
+import ${component_name_camel} from './${component_name}';
+\`\`\`
+EOL
+
+# 创建 Storybook 文件（如果启用）
+if [ "$generate_storybook" == true ]; then
+    storybook_file="$component_dir/${component_name}.stories.$language"
+    cat <<EOL > "$storybook_file"
+import React from 'react';
+import ${component_name_camel} from './index';
+
+export default {
+    title: 'Components/${component_name_camel}',
+    component: ${component_name_camel},
+};
+
+const Template = (args) => <${component_name_camel} {...args} />;
+
+export const Default = Template.bind({});
+Default.args = {};
+EOL
+fi
+
+# 创建 Hook 文件（如果启用）
+if [ "$generate_hook" == true ]; then
+    hook_file="$component_dir/use${component_name_camel}.$language"
+    cat <<EOL > "$hook_file"
+import { useEffect } from 'react';
+
+const use${component_name_camel} = () => {
+    useEffect(() => {
+        console.log('Hook is running');
+    }, []);
+};
+
+export default use${component_name_camel};
+EOL
+fi
+
+echo "组件 '$component_name' 创建成功！"
