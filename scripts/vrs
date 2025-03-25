@@ -1,0 +1,288 @@
+#!/bin/bash
+
+# 清理函数
+cleanup() {
+  echo "脚本中断，清理中..."
+  if [ -d "$project_dir" ]; then
+    rm -rf "$project_dir"
+  fi
+  exit 1
+}
+
+# 捕获中断信号
+trap cleanup SIGINT SIGTERM
+
+# 检查是否提供了项目名称
+if [ "$#" -lt 1 ]; then
+  echo "用法: bash create-react-app.sh <项目名称>"
+  exit 1
+fi
+
+# 项目名称
+project_name=$1
+project_dir="./$project_name"
+
+# 检查目录是否已存在
+if [ -d "$project_dir" ]; then
+  echo "错误: 目录 '$project_dir' 已存在，无法创建。"
+  exit 1
+fi
+
+# 创建项目目录
+mkdir -p "$project_dir" || {
+  echo "错误: 无法创建目录 '$project_dir'。"
+  exit 1
+}
+
+# 进入项目目录
+cd "$project_dir" || {
+  echo "错误: 无法进入目录 '$project_dir'。"
+  exit 1
+}
+
+# 初始化 Git 仓库
+echo "初始化 Git 仓库..."
+git init || {
+  echo "警告: Git 初始化失败。"
+}
+
+# 创建 .gitignore 文件
+cat <<EOL > .gitignore
+node_modules/
+dist/
+*.log
+.DS_Store
+EOL
+
+# 选择包管理器
+echo "请选择包管理器:"
+echo "1) npm"
+echo "2) yarn"
+read -p "输入数字选择 (默认: 1): " package_manager
+
+case $package_manager in
+  2)
+    if ! command -v yarn &> /dev/null; then
+      echo "错误: yarn 未安装。请先安装 yarn。"
+      exit 1
+    fi
+    install_cmd="yarn"
+    run_cmd="yarn"
+    ;;
+  *)
+    install_cmd="npm install"
+    run_cmd="npm run"
+    ;;
+esac
+
+# 初始化 package.json
+cat <<EOL > package.json
+{
+  "name": "$project_name",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0"
+  }
+}
+EOL
+
+# 安装依赖
+echo "安装依赖..."
+$install_cmd || {
+  echo "错误: 依赖安装失败。"
+  exit 1
+}
+
+# 添加 ESLint 和 Prettier 配置
+echo "添加 ESLint 和 Prettier 配置..."
+npm install --save-dev eslint prettier eslint-plugin-react eslint-config-prettier eslint-plugin-prettier || {
+  echo "错误: ESLint 和 Prettier 安装失败。"
+  exit 1
+}
+
+cat <<EOL > .eslintrc.json
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {}
+}
+EOL
+
+cat <<EOL > .prettierrc
+{
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "printWidth": 80
+}
+EOL
+
+# 创建 tsconfig.json
+cat <<EOL > tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "NodeNext",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src"]
+}
+EOL
+
+# 创建 vite.config.ts
+cat <<EOL > vite.config.ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 3000
+  }
+})
+EOL
+
+# 创建项目结构
+mkdir -p src
+cat <<EOL > src/main.tsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)
+EOL
+
+cat <<EOL > src/App.tsx
+import React from 'react'
+
+function App() {
+  return (
+    <div>
+      <h1>欢迎使用 $project_name</h1>
+      <p>这是一个 React 项目，由脚本自动生成。</p>
+    </div>
+  )
+}
+
+export default App
+EOL
+
+cat <<EOL > src/index.css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 20px;
+}
+EOL
+
+# 创建 index.html
+cat <<EOL > index.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>$project_name</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+EOL
+
+# 创建 README.md
+cat <<EOL > README.md
+# $project_name
+
+这是一个由脚本自动生成的 React 项目。
+
+## 项目结构
+
+- \`src/\`: 源代码目录
+  - \`main.tsx\`: 入口文件
+  - \`App.tsx\`: 主组件
+  - \`index.css\`: 全局样式
+- \`public/\`: 静态资源目录
+- \`package.json\`: 项目依赖和脚本
+- \`tsconfig.json\`: TypeScript 配置
+- \`vite.config.ts\`: Vite 配置
+
+## 可用脚本
+
+在项目目录下，你可以运行以下命令：
+
+- \`$run_cmd dev\`: 启动开发服务器
+- \`$run_cmd build\`: 构建生产版本
+- \`$run_cmd preview\`: 预览生产版本
+
+## 开发环境
+
+- 开发服务器默认运行在端口 3000。如果端口被占用，脚本会自动尝试下一个可用端口。
+EOL
+
+# 检查端口冲突并启动开发服务器
+start_dev_server() {
+  port=3000
+  while true; do
+    if ! lsof -i :$port > /dev/null 2>&1; then
+      echo "项目 '$project_name' 已成功创建并启动开发服务器，端口号: $port"
+      $run_cmd dev -- --port $port
+      break
+    else
+      echo "端口 $port 已被占用，尝试端口 $(($port + 1))"
+      port=$(($port + 1))
+    fi
+  done
+}
+
+# 启动开发服务器
+start_dev_server

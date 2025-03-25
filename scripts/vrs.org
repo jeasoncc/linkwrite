@@ -1,0 +1,48 @@
+#+TITLE: Vite + React 项目创建脚本
+#+AUTHOR: Your Name
+#+DATE: 2023-10-10
+
+* 简介
+这是一个用于快速创建基于 Vite 和 React 项目的 Bash 脚本。它支持 TypeScript，并自动配置 ESLint、Prettier 和 Git。
+
+* 功能
+- 自动创建项目目录和文件结构。
+- 支持选择包管理器（npm 或 yarn）。
+- 自动配置 TypeScript、ESLint 和 Prettier。
+- 自动初始化 Git 仓库并添加 .gitignore 文件。
+- 检查端口冲突并启动开发服务器。
+
+* 使用方法
+1. 将脚本添加到全局路径：
+   - 将脚本保存到 ~/.scripts/vite-react-starter.sh。
+   - 赋予执行权限：
+     #+BEGIN_SRC bash
+     chmod +x ~/.scripts/vite-react-starter.sh
+     #+END_SRC
+   - 将脚本路径添加到 PATH 环境变量中：
+     #+BEGIN_SRC bash
+     export PATH="$HOME/.scripts:$PATH"
+     #+END_SRC
+2. 运行脚本：
+   #+BEGIN_SRC bash
+   vite-react-starter.sh <项目名称>
+   #+END_SRC
+3. 按照提示选择包管理器（npm 或 yarn）。
+4. 脚本会自动完成项目创建并启动开发服务器。
+
+* 项目结构
+以下是脚本生成的项目结构：
+#+BEGIN_SRC text
+<项目名称>/
+├── src/
+│   ├── main.tsx
+│   ├── App.tsx
+│   └── index.css
+├── public/
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+├── .eslintrc.json
+├── .prettierrc
+├── .gitignore
+└──
